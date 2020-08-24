@@ -46,8 +46,8 @@ export default {
     animate() {
       requestAnimationFrame(this.animate);
 
-      this.cube.rotation.x += 0.02;
-      this.cube.rotation.y += 0.02;
+      //this.cube.rotation.x += 0.02;
+      //this.cube.rotation.y += 0.02;
 
       this.renderer.render(this.scene, this.camera);
       this.controls.update();
