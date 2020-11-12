@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <rotate-box></rotate-box>
+    <NLink to="/test1" class="button--grey">About</NLink>
   </div>
 </template>
 
