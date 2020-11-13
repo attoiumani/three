@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@nuxtjs/pwa": "^3.0.0-beta.20",
+    "gsap": "^3.5.1",
     "nuxt": "^2.14.0",
+    "pixi-filters": "^3.1.1",
     "pixi.js": "^5.3.3",
     "three": "^0.119.1",
     "three-trackballcontrols": "^0.0.8"
