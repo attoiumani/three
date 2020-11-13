@@ -1,5 +1,6 @@
 <template>
-  <div class="stage" @click="pop"></div>
+<NLink to="/" class="button--grey">About</NLink>
+  
 </template>
 
 <script>
