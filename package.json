@@ -17,5 +17,7 @@
     "three": "^0.119.1",
     "three-trackballcontrols": "^0.0.8"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "webpack-cli": "^4.2.0"
+  }
 }
