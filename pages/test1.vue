@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import * as PIXI from "pixi.js";
+import * as PIXI from 'pixi.js'
 import { TweenLite } from "gsap";
 
 const SIZE = 512;
