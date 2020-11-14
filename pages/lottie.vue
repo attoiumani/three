@@ -1,56 +1,32 @@
 <template>
   <div id="app">
-    <LottieAnima :options="defaultOptions" v-on:animCreated="handleAnimation"/>
-    <div>
-      <p>Speed: x{{animationSpeed}}</p>
-      <input
-        type="range"
-        value="1"
-        min="0"
-        max="3"
-        step="0.5"
-        v-on:change="onSpeedChange"
-        v-model="animationSpeed"
-      >
-    </div>
-    <button v-on:click="stop">stop</button>
-    <button v-on:click="pause">pause</button>
-    <button v-on:click="play">play</button>
+    <div ref="lottie"></div>
   </div>
 </template>
 
 <script>
-import LottieAnima from "@/components/LottieAnima";
-import * as animationData from "@/anima.json";
+import lottie from "lottie-web";
+import lottieData from "@/assets/animation/anima.json";
 
 export default {
   name: "App",
-  components: {
-    LottieAnima
+  components: {},
+
+  mounted() {
+    this.lottie();
   },
-  data() {
-    return {
-      defaultOptions: { animationData: animationData },
-      animationSpeed: 1
-    };
-  },
+
   methods: {
-    handleAnimation: function(anim) {
-      this.anim = anim;
+    lottie() {
+      lottie.loadAnimation({
+        container: this.$refs.lottie,
+        renderer: "canvas",
+        loop: true,
+        autoplay: true,
+        animationData: lottieData,
+      });
     },
-    stop: function() {
-      this.anim.stop();
-    },
-    play: function() {
-      this.anim.play();
-    },
-    pause: function() {
-      this.anim.pause();
-    },
-    onSpeedChange: function() {
-      this.anim.setSpeed(this.animationSpeed);
-    }
-  }
+  },
 };
 </script>
 
