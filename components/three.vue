@@ -1,7 +1,8 @@
 <template>
   <div>
     <canvas id="canvas" width="600" height="400"></canvas>
-    <NLink to="/test1" class="button--grey">About</NLink>
+    <NLink to="/pixi" class="button--grey">pixi</NLink>
+    <NLink to="/lottie" class="button--grey">lottie</NLink>
   </div>
 </template>
 
