@@ -1,28 +1,18 @@
 <template>
   <div id="app">
-    <rotate-box></rotate-box>
+    <three/>
     <NLink to="/test1" class="button--grey">About</NLink>
   </div>
 </template>
 
 <script>
-import RotateBox from "@/components/RotateBox";
+import three from "@/components/three.vue";
 
 export default {
   name: "app",
   components: {
-    RotateBox
+    three
   }
 };
 </script>
 
-<style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style> 
