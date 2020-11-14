@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <Canvas/>
+        <NLink to="/" class="button--grey">home</NLink>
   </div>
 </template>
 
@@ -23,8 +24,8 @@ const app = new PIXI.Application({
 document.body.appendChild(app.view);
 
 app.loader
-    //.add('bg_grass', 'https://s3-us-west-1.amazonaws.com/sp-prod-s3-assets/web/video_creatives/brooks/assets/image8.png')
-    .add('bg_grass', 'assets/cury.png')
+    .add('bg_grass', 'https://s3-us-west-1.amazonaws.com/sp-prod-s3-assets/web/video_creatives/brooks/assets/image8.png')
+    //.add('bg_grass', 'static/neko.jpg')
     .load(build);
 
 function build() {
