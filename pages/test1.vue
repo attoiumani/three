@@ -24,7 +24,7 @@ document.body.appendChild(app.view);
 
 app.loader
     //.add('bg_grass', 'https://s3-us-west-1.amazonaws.com/sp-prod-s3-assets/web/video_creatives/brooks/assets/image8.png')
-    .add('bg_grass', 'https://s3-us-west-1.amazonaws.com/sp-prod-s3-assets/web/video_creatives/brooks/assets/image8.png')
+    .add('bg_grass', '@/assets/cury.png')
     .load(build);
 
 function build() {
