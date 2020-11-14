@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
-    <Canvas/>
-        <NLink to="/" class="button--grey">home</NLink>
+  <div>
+    <Canvas />
+    <NLink to="/" class="button--grey">home</NLink>
   </div>
 </template>
 
@@ -12,49 +12,50 @@ if (process.client) {
 }
 
 export default {
-
   data() {
     return {};
   },
 
   mounted() {
-const app = new PIXI.Application({
-    width: 800, height: 600, backgroundColor: 0x1099bb, resolution: window.devicePixelRatio || 1,
-});
-document.body.appendChild(app.view);
+    const app = new PIXI.Application({
+      width: 800,
+      height: 600,
+      backgroundColor: 0x1099bb,
+      resolution: window.devicePixelRatio || 1,
+    });
+    document.body.appendChild(app.view);
 
-app.loader
-    //.add('bg_grass', 'https://s3-us-west-1.amazonaws.com/sp-prod-s3-assets/web/video_creatives/brooks/assets/image8.png')
-    .add('bg_grass', '/image/neko.jpg')
-    .load(build);
+    app.loader
+      //.add('bg_grass', 'https://s3-us-west-1.amazonaws.com/sp-prod-s3-assets/web/video_creatives/brooks/assets/image8.png')
+      .add("bg_grass", "/image/neko.jpg")
+      .load(build);
 
-function build() {
-    // Create a new texture
-    const texture = app.loader.resources.bg_grass.texture;
+    function build() {
+      // Create a new texture
+      const texture = app.loader.resources.bg_grass.texture;
 
-    // Create the simple plane
-    const verticesX = 10;
-    const verticesY = 10;
-    const plane = new PIXI.SimplePlane(texture, verticesX, verticesY);
+      // Create the simple plane
+      const verticesX = 10;
+      const verticesY = 10;
+      const plane = new PIXI.SimplePlane(texture, verticesX, verticesY);
 
-    plane.x = 100;
-    plane.y = 100;
+      plane.x = 100;
+      plane.y = 100;
 
-    app.stage.addChild(plane);
+      app.stage.addChild(plane);
 
-    // Get the buffer for vertice positions.
-    const buffer = plane.geometry.getBuffer('aVertexPosition');
+      // Get the buffer for vertice positions.
+      const buffer = plane.geometry.getBuffer("aVertexPosition");
 
-    // Listen for animate update
-    app.ticker.add((delta) => {
+      // Listen for animate update
+      app.ticker.add((delta) => {
         // Randomize the vertice positions a bit to create movement.
         for (let i = 0; i < buffer.data.length; i++) {
-            buffer.data[i] += (Math.random() - 0.5);
+          buffer.data[i] += Math.random() - 0.5;
         }
         buffer.update();
-    });
-}
-
+      });
+    }
   },
 };
 </script>
