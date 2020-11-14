@@ -3,14 +3,16 @@
 </template>
 
 <script>
-import { PIXI } from 'expo-pixi';
 import { TweenLite } from "gsap";
 
-const SIZE = 512;
+let PIXI;
+if (process.client) {
+  const SIZE = 512;
 
-PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.LINEAR;
-PIXI.settings.PRECISION_FRAGMENT = PIXI.PRECISION.HIGH;
-const DPR = window.devicePixelRatio && window.devicePixelRatio >= 2 ? 2 : 1;
+  PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.LINEAR;
+  PIXI.settings.PRECISION_FRAGMENT = PIXI.PRECISION.HIGH;
+  const DPR = window.devicePixelRatio && window.devicePixelRatio >= 2 ? 2 : 1;
+}
 
 export default {
   name: "App",
@@ -23,7 +25,7 @@ export default {
       antialias: true,
       transparent: true,
       resolution: DPR,
-      autoResize: true
+      autoResize: true,
     });
 
     const clipRect = new PIXI.Rectangle(
@@ -42,7 +44,7 @@ export default {
 
     const IMAGES = [
       "https://s3-us-west-2.amazonaws.com/s.cdpn.io/123024/j110.jpg",
-      "https://s3-us-west-2.amazonaws.com/s.cdpn.io/123024/j104.jpg"
+      "https://s3-us-west-2.amazonaws.com/s.cdpn.io/123024/j104.jpg",
     ];
 
     this.$options.dispSprite = PIXI.Sprite.fromImage(
@@ -71,7 +73,7 @@ export default {
 
     try {
       PIXI.loader.add(IMAGES).load((l, images) => {
-        Object.keys(images).forEach(key => {
+        Object.keys(images).forEach((key) => {
           let sprite = new PIXI.Sprite(PIXI.loader.resources[key].texture);
 
           this.$options.slides.push(sprite);
@@ -87,14 +89,14 @@ export default {
           onCompleted: () => {
             TweenLite.to(this.$options.slides[0], 0.575, {
               alpha: 0,
-              delay: 2
+              delay: 2,
             });
 
             TweenLite.to(this.$options.slides[1], 0.575, {
               alpha: 1,
-              delay: 2
+              delay: 2,
             });
-          }
+          },
         });
       });
     } catch (e) {
@@ -109,8 +111,8 @@ export default {
       // this.$options.dispSprite.rotation += 0.33 / 10;
 
       window.requestAnimationFrame(this.render.bind(this));
-    }
-  }
+    },
+  },
 };
 </script>
 
