@@ -23,7 +23,7 @@ bg.width = app.screen.width;
 bg.height = app.screen.height;
 app.stage.addChild(bg);
 
-const littleDudes = PIXI.Sprite.from('examples/assets/pixi-filters/depth_blur_dudes.jpg');
+const littleDudes = PIXI.Sprite.from('@/assets/images/icon.png');
 littleDudes.x = (app.screen.width / 2) - 315;
 littleDudes.y = 200;
 app.stage.addChild(littleDudes);
