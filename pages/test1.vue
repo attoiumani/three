@@ -9,50 +9,48 @@ if (process.client) {
 }
 
 export default {
-  
+
   data() {
     return {};
   },
 
   mounted() {
-    const app = new PIXI.Application({
-      width: 800,
-      height: 600,
-      backgroundColor: 0x1099bb,
-      resolution: window.devicePixelRatio || 1,
-    });
-    document.body.appendChild(app.view);
+ const app = new PIXI.Application();
+document.body.appendChild(app.view);
 
-    const container = new PIXI.Container();
+const bg = PIXI.Sprite.from('examples/assets/pixi-filters/bg_depth_blur.jpg');
+bg.width = app.screen.width;
+bg.height = app.screen.height;
+app.stage.addChild(bg);
 
-    app.stage.addChild(container);
+const littleDudes = PIXI.Sprite.from('examples/assets/pixi-filters/depth_blur_dudes.jpg');
+littleDudes.x = (app.screen.width / 2) - 315;
+littleDudes.y = 200;
+app.stage.addChild(littleDudes);
 
-    // Create a new texture
-    const texture = PIXI.Texture.from("examples/assets/bunny.png");
+const littleRobot = PIXI.Sprite.from('examples/assets/pixi-filters/depth_blur_moby.jpg');
+littleRobot.x = (app.screen.width / 2) - 200;
+littleRobot.y = 100;
+app.stage.addChild(littleRobot);
 
-    // Create a 5x5 grid of bunnies
-    for (let i = 0; i < 25; i++) {
-      const bunny = new PIXI.Sprite(texture);
-      bunny.anchor.set(0.5);
-      bunny.x = (i % 5) * 40;
-      bunny.y = Math.floor(i / 5) * 40;
-      container.addChild(bunny);
-    }
+const blurFilter1 = new PIXI.filters.BlurFilter();
+const blurFilter2 = new PIXI.filters.BlurFilter();
 
-    // Move container to the center
-    container.x = app.screen.width / 2;
-    container.y = app.screen.height / 2;
+littleDudes.filters = [blurFilter1];
+littleRobot.filters = [blurFilter2];
 
-    // Center bunny sprite in local container coordinates
-    container.pivot.x = container.width / 2;
-    container.pivot.y = container.height / 2;
+let count = 0;
 
-    // Listen for animate update
-    app.ticker.add((delta) => {
-      // rotate the container!
-      // use delta to create frame-independent transform
-      container.rotation -= 0.01 * delta;
-    });
+app.ticker.add(() => {
+    count += 0.005;
+
+    const blurAmount = Math.cos(count);
+    const blurAmount2 = Math.sin(count);
+
+    blurFilter1.blur = 20 * (blurAmount);
+    blurFilter2.blur = 20 * (blurAmount2);
+});
+
   },
 };
 </script>
