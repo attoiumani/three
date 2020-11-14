@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <pixi/>
+    <pixi />
   </div>
 </template>
 
@@ -10,7 +10,7 @@ import pixi from "@/components/pixi.vue";
 export default {
   name: "app",
   components: {
-    pixi
-  }
+    pixi,
+  },
 };
 </script>
