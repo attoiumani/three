@@ -1,16 +1,60 @@
 <template>
-  <div id="app">
-    <pixi />
+  <div>
+    <Canvas/>
+        <NLink to="/" class="button--grey">home</NLink>
   </div>
 </template>
 
 <script>
-import pixi from "@/components/pixi.vue";
+let PIXI;
+if (process.client) {
+  PIXI = require("pixi.js");
+}
 
 export default {
-  name: "app",
-  components: {
-    pixi,
+
+  data() {
+    return {};
+  },
+
+  mounted() {
+const app = new PIXI.Application({
+    width: 800, height: 600, backgroundColor: 0x1099bb, resolution: window.devicePixelRatio || 1,
+});
+document.body.appendChild(app.view);
+
+app.loader
+    //.add('bg_grass', 'https://s3-us-west-1.amazonaws.com/sp-prod-s3-assets/web/video_creatives/brooks/assets/image8.png')
+    .add('bg_grass', '/image/neko.jpg')
+    .load(build);
+
+function build() {
+    // Create a new texture
+    const texture = app.loader.resources.bg_grass.texture;
+
+    // Create the simple plane
+    const verticesX = 10;
+    const verticesY = 10;
+    const plane = new PIXI.SimplePlane(texture, verticesX, verticesY);
+
+    plane.x = 100;
+    plane.y = 100;
+
+    app.stage.addChild(plane);
+
+    // Get the buffer for vertice positions.
+    const buffer = plane.geometry.getBuffer('aVertexPosition');
+
+    // Listen for animate update
+    app.ticker.add((delta) => {
+        // Randomize the vertice positions a bit to create movement.
+        for (let i = 0; i < buffer.data.length; i++) {
+            buffer.data[i] += (Math.random() - 0.5);
+        }
+        buffer.update();
+    });
+}
+
   },
 };
 </script>
