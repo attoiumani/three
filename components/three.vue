@@ -1,5 +1,8 @@
 <template>
-  <canvas id="canvas" width="600" height="400"></canvas>
+  <div>
+    <canvas id="canvas" width="600" height="400"></canvas>
+    <NLink to="/test1" class="button--grey">About</NLink>
+  </div>
 </template>
 
 <script>
@@ -23,7 +26,7 @@ export default {
     // canvasを後付けで設定する方法あったら教えてほしいー
     this.renderer = new THREE.WebGLRenderer({
       antialias: true,
-      canvas: $canvas
+      canvas: $canvas,
     });
 
     this.camera.position.set(0, 0, 2);
@@ -51,8 +54,8 @@ export default {
 
       this.renderer.render(this.scene, this.camera);
       this.controls.update();
-    }
-  }
+    },
+  },
 };
 </script>
 
