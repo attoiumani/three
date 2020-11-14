@@ -1,5 +1,7 @@
 <template>
-  <h1>hello</h1>
+  <div id="app">
+    <Canvas/>
+  </div>
 </template>
 
 <script>
@@ -15,41 +17,41 @@ export default {
   },
 
   mounted() {
- const app = new PIXI.Application();
+const app = new PIXI.Application({
+    width: 800, height: 600, backgroundColor: 0x1099bb, resolution: window.devicePixelRatio || 1,
+});
 document.body.appendChild(app.view);
 
-const bg = PIXI.Sprite.from('examples/assets/pixi-filters/bg_depth_blur.jpg');
-bg.width = app.screen.width;
-bg.height = app.screen.height;
-app.stage.addChild(bg);
+app.loader
+    .add('bg_grass', 'https://s3-us-west-1.amazonaws.com/sp-prod-s3-assets/web/video_creatives/brooks/assets/image8.png')
+    .load(build);
 
-const littleDudes = PIXI.Sprite.from('@/assets/images/icon.png');
-littleDudes.x = (app.screen.width / 2) - 315;
-littleDudes.y = 200;
-app.stage.addChild(littleDudes);
+function build() {
+    // Create a new texture
+    const texture = app.loader.resources.bg_grass.texture;
 
-const littleRobot = PIXI.Sprite.from('examples/assets/pixi-filters/depth_blur_moby.jpg');
-littleRobot.x = (app.screen.width / 2) - 200;
-littleRobot.y = 100;
-app.stage.addChild(littleRobot);
+    // Create the simple plane
+    const verticesX = 10;
+    const verticesY = 10;
+    const plane = new PIXI.SimplePlane(texture, verticesX, verticesY);
 
-const blurFilter1 = new PIXI.filters.BlurFilter();
-const blurFilter2 = new PIXI.filters.BlurFilter();
+    plane.x = 100;
+    plane.y = 100;
 
-littleDudes.filters = [blurFilter1];
-littleRobot.filters = [blurFilter2];
+    app.stage.addChild(plane);
 
-let count = 0;
+    // Get the buffer for vertice positions.
+    const buffer = plane.geometry.getBuffer('aVertexPosition');
 
-app.ticker.add(() => {
-    count += 0.005;
-
-    const blurAmount = Math.cos(count);
-    const blurAmount2 = Math.sin(count);
-
-    blurFilter1.blur = 20 * (blurAmount);
-    blurFilter2.blur = 20 * (blurAmount2);
-});
+    // Listen for animate update
+    app.ticker.add((delta) => {
+        // Randomize the vertice positions a bit to create movement.
+        for (let i = 0; i < buffer.data.length; i++) {
+            buffer.data[i] += (Math.random() - 0.5);
+        }
+        buffer.update();
+    });
+}
 
   },
 };
