@@ -5,23 +5,12 @@
 </template>
 
 <script>
-import three from "@/components/three.vue";
+import pixi from "@/components/pixi.vue";
 
 export default {
   name: "app",
   components: {
-    three
+    pixi
   }
 };
 </script>
-
-<style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style> 
