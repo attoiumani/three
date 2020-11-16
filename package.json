@@ -13,7 +13,6 @@
     "gsap": "^3.5.1",
     "lottie-web": "^5.7.4",
     "nuxt": "^2.14.0",
-    "pixi-filters": "^3.1.1",
     "pixi.js": "^5.3.3",
     "three": "^0.119.1",
     "three-trackballcontrols": "^0.0.8"
