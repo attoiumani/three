@@ -1,15 +1,13 @@
 <template>
-  <div>
-    <Canvas />
-    <NLink to="/" class="button--grey">home</NLink>
-  </div>
+
 </template>
 
 <script>
-let PIXI;
+import * as PIXI from 'pixi.js';
+/*let PIXI;
 if (process.client) {
   PIXI = require("pixi.js");
-}
+}*/
 
 export default {
   data() {
@@ -21,7 +19,6 @@ export default {
       width: 800,
       height: 600,
       backgroundColor: 0x1099bb,
-      resolution: window.devicePixelRatio || 1,
     });
     document.body.appendChild(app.view);
 
