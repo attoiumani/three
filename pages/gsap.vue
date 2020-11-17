@@ -1,7 +1,5 @@
 <template>
   <div class="wrapper">
-    <hr />
-
     <div id="wh" class="obj">1:width / height</div>
     <div id="xy" class="obj">2:x / y</div>
     <div id="scale" class="obj">3:scale / rotation</div>
