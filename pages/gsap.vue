@@ -25,12 +25,7 @@ export default {
   },
   mounted() {
     this.scrollItemA();
-
-    // width / height：正の値、0、'**%'、'auto'で設定
-    //gsap.to("#wh", 1.0, { width: "10%", height: 150 }); //
-
-    // x軸移動 / y軸移動：正負の値、'**%'で設定
-    gsap.to("#xy", 1.0, { x: "-10%", y: 100 }); //
+    this.scrollItemB();
 
     // 拡大・縮小 / 回転：倍率、角度で設定
     gsap.to("#scale", 1.0, { scale: 1.2, rotation: 225 }); //
@@ -58,6 +53,18 @@ export default {
         },
       });
     },
+    scrollItemB() {
+      gsap.to("#xy", {
+        // 動かしたい要素は".a"
+        x: 500, // 右方向に500動く
+        duration: 1, // アニメーションは1秒間
+        scrollTrigger: {
+          trigger: "#xy", // 要素".a"がビューポートに入ったときにアニメーション開始
+          start: "center center", // アニメーション開始位置
+          markers: true, // マーカー表示
+        },
+      });
+    },
   },
 };
 </script>
@@ -80,6 +87,7 @@ export default {
 }
 #xy {
   background: #da6272;
+  top: 500px;
 }
 #scale {
   background: #f9db57;
