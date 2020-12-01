@@ -1,5 +1,5 @@
 <template>
-
+  <canvas id ="canvas"></canvas>
 </template>
 
 <script>
@@ -16,11 +16,14 @@ export default {
 
   mounted() {
     const app = new PIXI.Application({
+      view: canvas,
       width: 800,
       height: 600,
       backgroundColor: 0x1099bb,
     });
     document.body.appendChild(app.view);
+
+const texture = PIXI.Texture.fromImage("bg_grass", "/image/neko.jpg");
 
     app.loader
       .add('bg_grass', 'https://s3-us-west-1.amazonaws.com/sp-prod-s3-assets/web/video_creatives/brooks/assets/image8.png')
