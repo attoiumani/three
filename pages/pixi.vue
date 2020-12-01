@@ -1,10 +1,10 @@
 <template>
-  <div id="filter"></div>
+  <canvas id ="canvas"></canvas>
 </template>
 
 <script>
-import * as PIXI from "pixi.js";
-import { GlitchFilter } from "pixi-filters";
+import * as PIXI from 'pixi.js';
+import * as filters from "pixi-filters";
 
 /*let PIXI;
 if (process.client) {
@@ -18,34 +18,44 @@ export default {
 
   mounted() {
     const app = new PIXI.Application({
-      width: 500,
-      height: 500,
-      backgroundColor: 0x000000,
+      view: canvas,
+      width: 800,
+      height: 600,
+      backgroundColor: 0x1099bb,
     });
-    const filterElement = document.getElementById("filter");
 
-    filterElement.appendChild(app.view);
+
     app.loader
-      .add("thumb", "https://front-note.net/dummy.png")
-      .load((loader, resources) => {
-        const thumb = new PIXI.Sprite(resources.thumb.texture);
-        thumb.x = 100;
-        thumb.y = 100;
+      .add('bg_grass', 'https://s3-us-west-1.amazonaws.com/sp-prod-s3-assets/web/video_creatives/brooks/assets/image8.png')
+      //.add("bg_grass", "/image/neko.jpg")
+      .load(build);
 
-        let fil = new PIXI.filters.GlitchFilter({
-          slices: 10,
-          offset: 100,
-          fillMode: 1,
-          speed: 0,
-        });
-        thumb.filters = [fil];
-        app.stage.addChild(thumb);
-        app.ticker.maxFPS = 1;
-        app.ticker.add(() => {
-          fil.slices = Math.floor(Math.random() * 10);
-          fil.offset = Math.floor(Math.random() * 100);
-        });
+    function build() {
+      // Create a new texture
+      const texture = app.loader.resources.bg_grass.texture;
+
+      // Create the simple plane
+      const verticesX = 10;
+      const verticesY = 10;
+      const plane = new PIXI.SimplePlane(texture, verticesX, verticesY);
+
+      plane.x = 100;
+      plane.y = 100;
+
+      app.stage.addChild(plane);
+
+      // Get the buffer for vertice positions.
+      const buffer = plane.geometry.getBuffer("aVertexPosition");
+
+      // Listen for animate update
+      app.ticker.add((delta) => {
+        // Randomize the vertice positions a bit to create movement.
+        for (let i = 0; i < buffer.data.length; i++) {
+          buffer.data[i] += Math.random() - 0.5;
+        }
+        buffer.update();
       });
+    }
   },
 };
 </script>
