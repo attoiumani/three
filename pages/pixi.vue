@@ -23,8 +23,6 @@ export default {
     });
     document.body.appendChild(app.view);
 
-const texture = PIXI.Texture.fromImage("bg_grass", "/image/neko.jpg");
-
     app.loader
       .add('bg_grass', 'https://s3-us-west-1.amazonaws.com/sp-prod-s3-assets/web/video_creatives/brooks/assets/image8.png')
       //.add("bg_grass", "/image/neko.jpg")
