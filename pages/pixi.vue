@@ -1,61 +1,49 @@
 <template>
+<div>
   <canvas id ="canvas"></canvas>
+</div>
 </template>
 
 <script>
-import * as PIXI from 'pixi.js';
-import * as filters from "pixi-filters";
-
-/*let PIXI;
-if (process.client) {
-  PIXI = require("pixi.js");
-}*/
+import * as PIXI from "pixi.js";
+import { GlitchFilter } from "pixi-filters";
 
 export default {
   data() {
-    return {};
+    return {
+      imgPath: require(`@/assets/image/cr7.jpg`),
+    };
   },
 
   mounted() {
     const app = new PIXI.Application({
       view: canvas,
-      width: 800,
-      height: 600,
-      backgroundColor: 0x1099bb,
+    });
+    document.body.appendChild(app.view);
+
+    app.stage.interactive = true;
+
+    const container = new PIXI.Container();
+    app.stage.addChild(container);
+
+    const glitchFilter = new GlitchFilter({
+      slices: 10,
+      offset: 100,
+      fillMode: 1,
+      speed: 0,
     });
 
+    app.ticker.maxFPS = 1;
+    app.ticker.add(function () {
+      glitchFilter.offset = Math.floor(Math.random() * 100);
+      glitchFilter.slices = Math.floor(Math.random() * 10);
+    });
 
-    app.loader
-      .add('bg_grass', 'https://s3-us-west-1.amazonaws.com/sp-prod-s3-assets/web/video_creatives/brooks/assets/image8.png')
-      //.add("bg_grass", "/image/neko.jpg")
-      .load(build);
+    const displacementSprite = PIXI.Sprite.from(this.imgPath);
 
-    function build() {
-      // Create a new texture
-      const texture = app.loader.resources.bg_grass.texture;
+    app.stage.addChild(displacementSprite);
 
-      // Create the simple plane
-      const verticesX = 10;
-      const verticesY = 10;
-      const plane = new PIXI.SimplePlane(texture, verticesX, verticesY);
-
-      plane.x = 100;
-      plane.y = 100;
-
-      app.stage.addChild(plane);
-
-      // Get the buffer for vertice positions.
-      const buffer = plane.geometry.getBuffer("aVertexPosition");
-
-      // Listen for animate update
-      app.ticker.add((delta) => {
-        // Randomize the vertice positions a bit to create movement.
-        for (let i = 0; i < buffer.data.length; i++) {
-          buffer.data[i] += Math.random() - 0.5;
-        }
-        buffer.update();
-      });
-    }
+    displacementSprite.filters = [glitchFilter];
   },
 };
 </script>
