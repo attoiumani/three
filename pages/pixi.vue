@@ -11,7 +11,7 @@ import { GlitchFilter } from "pixi-filters";
 export default {
   data() {
     return {
-      imgPath: require(`@/assets/image/cr7.jpg`),
+      imgPath: require(`@/assets/images/cr7.jpg`),
     };
   },
 
