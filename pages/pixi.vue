@@ -40,6 +40,7 @@ export default {
     });
 
     const displacementSprite = PIXI.Sprite.from(this.imgPath);
+    
 
     app.stage.addChild(displacementSprite);
 
