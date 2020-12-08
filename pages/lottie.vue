@@ -1,42 +1,33 @@
 <template>
-  <div id="app">
-    <div ref="lottie"></div>
-  </div>
+  <swiper
+    :slides-per-view="3"
+    :space-between="50"
+    @swiper="onSwiper"
+    @slideChange="onSlideChange"
+  >
+    <swiper-slide>Slide 1</swiper-slide>
+    <swiper-slide>Slide 2</swiper-slide>
+    <swiper-slide>Slide 3</swiper-slide>
+    ...
+  </swiper>
 </template>
-
 <script>
-import lottie from "lottie-web";
-import lottieData from "@/assets/animation/anima.json";
+  // Import Swiper Vue.js components
+  import { Swiper, SwiperSlide } from 'swiper/vue';
 
-export default {
-  name: "App",
-  components: {},
-
-  mounted() {
-    this.lottie();
-  },
-
-  methods: {
-    lottie() {
-      lottie.loadAnimation({
-        container: this.$refs.lottie,
-        renderer: "canvas",
-        loop: true,
-        autoplay: true,
-        animationData: lottieData,
-      });
+  // Import Swiper styles
+  export default {
+    components: {
+      Swiper,
+      SwiperSlide,
     },
-  },
-};
+    methods: {
+      onSwiper(swiper) {
+        console.log(swiper)
+      },
+      onSlideChange() {
+        console.log('slide change')
+      },
+    },
+  };
 </script>
-
-<style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
