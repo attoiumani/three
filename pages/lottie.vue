@@ -1,43 +1,69 @@
 <template>
-  <div>
-    <swiper :options="swiperOption">
-      <swiper-slide>スライダー１</swiper-slide>
-      <swiper-slide>スライダー２</swiper-slide>
-      <swiper-slide>スライダー３</swiper-slide>
-   
-    <div slot="pagination" class="swiper-pagination" />
-    <div slot="button-prev" class="swiper-button-prev" />
-    <div slot="button-next" class="swiper-button-next" />
-     </swiper>
-  </div>
-</template>
 
+          <swiper ref="mySwiper" :options="swiperOptions">
+            <swiper-slide>
+              <div class="my-project">
+                <img class="img-fluid" src="https://fakeimg.pl/250x250" alt>
+              </div>
+            </swiper-slide>
+            <swiper-slide>
+              <div class="my-project">
+                <img class="img-fluid" src="https://fakeimg.pl/250x250" alt>
+              </div>
+            </swiper-slide>
+            <swiper-slide>
+              <div class="my-project">
+                <img class="img-fluid" src="https://fakeimg.pl/250x250" alt>
+              </div>
+            </swiper-slide>
+            <swiper-slide>
+              <div class="my-project">
+                <img class="img-fluid" src="https://fakeimg.pl/250x250" alt>
+              </div>
+            </swiper-slide>
+
+            <div class="swiper-button-prev" slot="button-prev"></div>
+            <div class="swiper-button-next" slot="button-next"></div>
+          </swiper>
+
+</template>
 <script>
+import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import "swiper/swiper-bundle.min.css";
+
 export default {
+  name: "HelloWorld",
+  components: { Swiper, SwiperSlide },
   data() {
     return {
-      swiperOption: {
-        speed: 1000, //スライドの切り替わりスピード
-        spaceBetween: 30, //各スライドの余白
-        centeredSlides: true, //スライダーを真ん中に
-        loop: true, //無限ループ
+      swiperOptions: {
+        loop: true,
         autoplay: {
-          //スライドの自動切り替え
-          delay: 5000, //スライドの自動切り替えの秒数
-          disableOnInteraction: false, //何らかのアクション後の自動切り替えを再開
-        },
-        pagination: {
-          //ページネーション設定
-          el: ".swiper-pagination",
-          clickable: true,
+          delay: 2500
         },
         navigation: {
-          //ナビゲーション設定
           nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
+          prevEl: ".swiper-button-prev"
         },
-      },
+        breakpoints: {
+          1: {
+            slidesPerView: 1
+          },
+          768: {
+            slidesPerView: 2
+          },
+          992: {
+            slidesPerView: 3
+          }
+        }
+      }
     };
-  },
+  }
 };
 </script>
+<style>
+h4 {
+  font-weight: 500;
+}
+
+</style>
