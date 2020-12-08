@@ -35,6 +35,7 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
+    { src: '@/plugins/vue-awesome-swiper', ssr: false }
   ],
   /*
   ** Auto import components
@@ -58,6 +59,9 @@ export default {
   */
  build: {
   transpile: ['gsap'],
-  vendor: ['pixi.js']
+  vendor: ['pixi.js'],
+  vendor: [
+    'vue-awesome-swiper'
+  ]
 }
 }
